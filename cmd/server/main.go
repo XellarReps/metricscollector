@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/XellarReps/metricscollector/internal/config"
 )
 
@@ -14,7 +15,7 @@ func main() {
 
 	cfg.Server.RegisterHTTP()
 
-	err = cfg.Server.ListenAndServe()
+	err = cfg.Server.RunServer()
 	if err != nil {
 		panic(err)
 	}
