@@ -7,19 +7,19 @@ import (
 )
 
 type Server struct {
-	Endpoint string
-	Mux      *http.ServeMux
-	Storage  *storage.MemStorage
+	Address string
+	Mux     *http.ServeMux
+	Storage *storage.MemStorage
 }
 
 type ServerConfig struct {
-	Endpoint string
+	Address string
 }
 
 func NewServer(cfg ServerConfig) *Server {
 	return &Server{
-		Endpoint: cfg.Endpoint,
-		Storage:  storage.NewMemStorage(),
+		Address: cfg.Address,
+		Storage: storage.NewMemStorage(),
 	}
 }
 
@@ -30,5 +30,5 @@ func (s *Server) RegisterHTTP() {
 }
 
 func (s *Server) RunServer() error {
-	return http.ListenAndServe(s.Endpoint, s.Mux)
+	return http.ListenAndServe(s.Address, s.Mux)
 }

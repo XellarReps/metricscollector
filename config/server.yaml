@@ -1,2 +1,2 @@
 server:
-  endpoint: ":8080"
+  address: ":8080"
