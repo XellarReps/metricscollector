@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
 	"strings"
 )
@@ -19,7 +18,6 @@ func (s *Server) UpdateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	elems := strings.Split(r.RequestURI, "/")
-	fmt.Println(elems)
 	if len(elems) != 5 {
 		http.Error(w, "some of the request elements are missing", http.StatusNotFound)
 		return
