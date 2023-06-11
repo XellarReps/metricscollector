@@ -12,13 +12,15 @@ type ServerConfig struct {
 }
 
 func NewServer(cfg ServerConfig) *Server {
-	mux := http.NewServeMux()
-	mux.HandleFunc(`/update/`, UpdateHandler)
-
 	return &Server{
 		Endpoint: cfg.Endpoint,
-		Mux:      mux,
 	}
+}
+
+func (s *Server) RegisterHTTP() {
+	s.Mux = http.NewServeMux()
+
+	s.Mux.HandleFunc(`/update/`, s.UpdateHandler)
 }
 
 func (s *Server) ListenAndServe() error {

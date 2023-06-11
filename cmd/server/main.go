@@ -12,6 +12,8 @@ func main() {
 		return
 	}
 
+	cfg.Server.RegisterHTTP()
+
 	err = cfg.Server.ListenAndServe()
 	if err != nil {
 		panic(err)
