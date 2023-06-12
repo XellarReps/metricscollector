@@ -47,7 +47,7 @@ func (ms *MemStorage) UpdateStorage(metricType, name, value string) error {
 func (ms *MemStorage) GetMetricFromStorage(metricType, name string) (string, error) {
 	if metricType == gauge {
 		if val, ok := ms.gauge[name]; ok {
-			return fmt.Sprintf("%f", val), nil
+			return strconv.FormatFloat(val, 'f', -1, 64), nil
 		} else {
 			return "", fmt.Errorf("metric with name `%s` not found", name)
 		}

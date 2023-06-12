@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"runtime"
+	"strconv"
 	"time"
 
 	"github.com/XellarReps/metricscollector/internal/metrics"
@@ -50,7 +51,7 @@ func (a *Agent) RunAgent() error {
 	for {
 		if iter == a.UpdatePerIteration {
 			for key, val := range gauge {
-				err := a.uploadMetrics(metrics.GaugeType, key, fmt.Sprintf("%.3f", val))
+				err := a.uploadMetrics(metrics.GaugeType, key, strconv.FormatFloat(val, 'f', -1, 64))
 				if err != nil {
 					return fmt.Errorf("upload failed: %v", err)
 				}
