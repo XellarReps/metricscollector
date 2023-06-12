@@ -1,0 +1,1 @@
+http://{{ .hostname }}/update/{{ .type }}/{{ .name }}/{{ .value }}

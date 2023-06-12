@@ -1,0 +1,12 @@
+<html lang="en">
+<head>
+   <title> All Metrics </title>
+</head>
+<body>
+{{- range $index, $element := .}}
+{{- range $name, $value := $element}}
+<h3> {{$index}} {{$name}} {{$value}} </h3>
+{{- end}}
+{{- end}}
+</body>
+</html>
