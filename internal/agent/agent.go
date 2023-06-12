@@ -10,6 +10,10 @@ import (
 	"github.com/XellarReps/metricscollector/internal/utils"
 )
 
+const (
+	templatePath = "internal/utils/templates/url.tpl"
+)
+
 type Agent struct {
 	Client             *http.Client
 	Endpoint           string
@@ -72,7 +76,7 @@ func (a *Agent) RunAgent() error {
 }
 
 func (a *Agent) uploadMetrics(metricType string, metricName string, metricValue string) error {
-	url, err := utils.CreateMetricURL(map[string]any{
+	url, err := utils.CreateMetricURL(templatePath, map[string]any{
 		"hostname": a.Endpoint,
 		"type":     metricType,
 		"name":     metricName,

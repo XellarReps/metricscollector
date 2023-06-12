@@ -7,11 +7,7 @@ import (
 	"io"
 )
 
-const (
-	templatePath = "internal/utils/templates/url.tpl"
-)
-
-func CreateMetricURL(params map[string]any) (string, error) {
+func CreateMetricURL(templatePath string, params map[string]any) (string, error) {
 	tpl, err := template.ParseFiles(templatePath)
 	if err != nil {
 		return "", fmt.Errorf("cannot open template file: %v", err)
