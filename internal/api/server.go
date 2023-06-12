@@ -9,7 +9,7 @@ import (
 type Server struct {
 	Address string
 	Mux     *http.ServeMux
-	Storage *storage.MemStorage
+	Storage storage.Repository
 }
 
 type ServerConfig struct {
@@ -19,7 +19,7 @@ type ServerConfig struct {
 func NewServer(cfg ServerConfig) *Server {
 	return &Server{
 		Address: cfg.Address,
-		Storage: storage.NewMemStorage(),
+		Storage: storage.Repository(storage.NewMemStorage()),
 	}
 }
 

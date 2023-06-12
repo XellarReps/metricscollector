@@ -1,0 +1,125 @@
+server:
+  address: ":8080"
+
+agent:
+  endpoint: "localhost:8080"
+  timeout: 10s
+  poll_interval: 2s
+  update_per_iteration: 5
+
+metrics:
+  - name: Alloc
+    type: gauge
+    view: runtime
+
+  - name: BuckHashSys
+    type: gauge
+    view: runtime
+
+  - name: Frees
+    type: gauge
+    view: runtime
+
+  - name: GCCPUFraction
+    type: gauge
+    view: runtime
+
+  - name: GCSys
+    type: gauge
+    view: runtime
+
+  - name: HeapAlloc
+    type: gauge
+    view: runtime
+
+  - name: HeapIdle
+    type: gauge
+    view: runtime
+
+  - name: HeapInuse
+    type: gauge
+    view: runtime
+
+  - name: HeapObjects
+    type: gauge
+    view: runtime
+
+  - name: HeapReleased
+    type: gauge
+    view: runtime
+
+  - name: HeapSys
+    type: gauge
+    view: runtime
+
+  - name: LastGC
+    type: gauge
+    view: runtime
+
+  - name: Lookups
+    type: gauge
+    view: runtime
+
+  - name: MCacheInuse
+    type: gauge
+    view: runtime
+
+  - name: MCacheSys
+    type: gauge
+    view: runtime
+
+  - name: MSpanInuse
+    type: gauge
+    view: runtime
+
+  - name: MSpanSys
+    type: gauge
+    view: runtime
+
+  - name: Mallocs
+    type: gauge
+    view: runtime
+
+  - name: NextGC
+    type: gauge
+    view: runtime
+
+  - name: NumForcedGC
+    type: gauge
+    view: runtime
+
+  - name: NumGC
+    type: gauge
+    view: runtime
+
+  - name: OtherSys
+    type: gauge
+    view: runtime
+
+  - name: PauseTotalNs
+    type: gauge
+    view: runtime
+
+  - name: StackInuse
+    type: gauge
+    view: runtime
+
+  - name: StackSys
+    type: gauge
+    view: runtime
+
+  - name: Sys
+    type: gauge
+    view: runtime
+
+  - name: TotalAlloc
+    type: gauge
+    view: runtime
+
+  - name: PollCount
+    type: counter
+    view: default
+
+  - name: RandomValue
+    type: gauge
+    view: default
