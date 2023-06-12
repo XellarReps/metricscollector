@@ -50,7 +50,7 @@ func (a *Agent) RunAgent() error {
 	for {
 		if iter == a.UpdatePerIteration {
 			for key, val := range gauge {
-				err := a.uploadMetrics(metrics.GaugeType, key, fmt.Sprintf("%f", val))
+				err := a.uploadMetrics(metrics.GaugeType, key, fmt.Sprintf("%.3f", val))
 				if err != nil {
 					return fmt.Errorf("upload failed: %v", err)
 				}
