@@ -74,13 +74,13 @@ func collectRuntimeStats(rm *runtime.MemStats) map[string]float64 {
 		name := valRuntimeStats.Type().Field(i).Name
 		value := valRuntimeStats.FieldByName(name).Interface()
 
-		switch value.(type) {
+		switch val := value.(type) {
 		case uint32:
-			runtimeStats[name] = float64(value.(uint32))
+			runtimeStats[name] = float64(val)
 		case uint64:
-			runtimeStats[name] = float64(value.(uint64))
+			runtimeStats[name] = float64(val)
 		case float64:
-			runtimeStats[name] = value.(float64)
+			runtimeStats[name] = val
 		}
 	}
 
