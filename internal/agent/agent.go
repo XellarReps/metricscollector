@@ -8,6 +8,7 @@ import (
 
 	"github.com/XellarReps/metricscollector/internal/metrics"
 	"github.com/XellarReps/metricscollector/internal/utils"
+	"github.com/go-resty/resty/v2"
 )
 
 const (
@@ -15,7 +16,7 @@ const (
 )
 
 type Agent struct {
-	Client             *http.Client
+	Client             *resty.Client
 	Endpoint           string
 	PollInterval       time.Duration
 	UpdatePerIteration int
@@ -32,11 +33,8 @@ type Config struct {
 }
 
 func NewAgent(cfg Config) *Agent {
-	client := http.Client{
-		Timeout: cfg.Timeout,
-	}
 	return &Agent{
-		Client:             &client,
+		Client:             resty.New().SetTimeout(cfg.Timeout),
 		Endpoint:           cfg.Endpoint,
 		PollInterval:       cfg.PollInterval,
 		UpdatePerIteration: cfg.UpdatePerIteration,
@@ -86,15 +84,13 @@ func (a *Agent) uploadMetrics(metricType string, metricName string, metricValue 
 		return fmt.Errorf("cannot create url: %v", err)
 	}
 
-	resp, err := a.Client.Post(url, "text/plain", nil)
+	resp, err := a.Client.R().Post(url)
 	if err != nil {
 		return fmt.Errorf("failed post: %v", err)
 	}
 
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("status code not equal 200: %v", resp.StatusCode)
+	if resp.StatusCode() != http.StatusOK {
+		return fmt.Errorf("status code not equal 200: %v", resp.StatusCode())
 	}
 
 	return nil

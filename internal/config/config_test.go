@@ -33,7 +33,7 @@ func TestConfig(t *testing.T) {
 
 	// test agent
 	assert.Equal(t, expectedEndpoint, cfg.Agent.Endpoint)
-	assert.Equal(t, expectedTimeout, cfg.Agent.Client.Timeout)
+	assert.Equal(t, expectedTimeout, cfg.Agent.Client.GetClient().Timeout)
 	assert.Equal(t, expectedPollInterval, cfg.Agent.PollInterval)
 	assert.Equal(t, expectedUpdatePerIteration, cfg.Agent.UpdatePerIteration)
 

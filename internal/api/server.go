@@ -4,11 +4,12 @@ import (
 	"net/http"
 
 	"github.com/XellarReps/metricscollector/internal/storage"
+	"github.com/go-chi/chi/v5"
 )
 
 type Server struct {
 	Address string
-	Mux     *http.ServeMux
+	Mux     *chi.Mux
 	Storage storage.Repository
 }
 
@@ -24,9 +25,13 @@ func NewServer(cfg ServerConfig) *Server {
 }
 
 func (s *Server) RegisterHTTP() {
-	s.Mux = http.NewServeMux()
+	s.Mux = chi.NewRouter()
 
-	s.Mux.HandleFunc(`/update/`, s.UpdateHandler)
+	s.Mux.Route("/", func(r chi.Router) {
+		r.Get("/", s.getAllMetricsHandler)
+		r.Get("/value/{type}/{name}", s.getMetricHandler)
+		r.Post("/update/{type}/{name}/{value}", s.updateHandler)
+	})
 }
 
 func (s *Server) RunServer() error {
