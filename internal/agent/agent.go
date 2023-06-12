@@ -87,6 +87,8 @@ func (a *Agent) uploadMetrics(metricType string, metricName string, metricValue 
 		return fmt.Errorf("failed post: %v", err)
 	}
 
+	defer resp.Body.Close()
+
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("status code not equal 200: %v", resp.StatusCode)
 	}
